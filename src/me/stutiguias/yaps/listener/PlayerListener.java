@@ -166,71 +166,69 @@ public class PlayerListener extends Util implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void PlayerInteract(PlayerInteractEvent event) {
-		if (!event.hasItem()
-				|| !event.getItem().hasItemMeta()
-				|| !event.getItem().getItemMeta().hasDisplayName()
-				|| !event.getItem().getItemMeta().getDisplayName().startsWith("YAPS"))
-			return;
+            if (isNotYAPSEvent(event)) return;
+            Player player = event.getPlayer();
 
-		if (event.getItem().getItemMeta().getDisplayName().equals("YAPS Wand")) {
-			
-			if (!event.hasBlock())
-				return;
-
-			Player player = event.getPlayer();
-			
-			if(!player.hasPermission("yaps.info")) return;
-			
-			if (!Yaps.AreaCreating.containsKey(player))
-				Yaps.AreaCreating.put(player, new Area());
-
-			Location location = event.getClickedBlock().getLocation();
-			String setOn = String.format("( %s,%s )", new Object[] { location.getX(), location.getZ() });
-
-			if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
-				Yaps.AreaCreating.get(player).setFirstSpot(location);
-
-				SendMessage(player, "&6First Spot Set on %s", new Object[] { setOn });
-				event.setCancelled(true);
-			}
-
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-				Yaps.AreaCreating.get(player).setSecondSpot(location);
-
-				SendMessage(player, "&6Second Spot Set on %s", new Object[] { setOn });
-				event.setCancelled(true);
-			}
-
-		}else{
-			
-			Player player = event.getPlayer();
-
-			if(!player.hasPermission("yaps.infowand")) return;
-			
-	        Block b = player.getTargetBlock((Set<Material>) null, 100);
-	        
-	        Location location = b.getLocation();
-	        
-	        int index = plugin.getAreaIndex(location);
-	        
-	        if(index == -1) {
-	            SendMessage(player, "&4 Not inside any area");
-		        event.setCancelled(true);
-	            return;
-	        }
-	        Area area = Yaps.Areas.get(index);
-	        
-	        SendMessage(player, MsgHr);
-	        SendMessage(player, "&3Name: &6%s", new Object[]{ area.getName() });
-	        SendMessage(player, "&3Owner: &6%s", new Object[]{ area.getOwner() });
-	        SendMessage(player, "&3Flags: &6%s", new Object[]{ area.getFlags() });
-	        SendMessage(player, MsgHr);
-	        
-	        event.setCancelled(true);
-			
-		}
+            if (event.getItem().getItemMeta().getDisplayName().equals("YAPS Wand")) {
+                YAPSWand(event,player);
+            }else{
+                YAPSInfoWand(event, player);
+            }
 	}
+        
+        public boolean isNotYAPSEvent(PlayerInteractEvent event) {
+           if (!event.hasItem()) return false;
+           if (!event.getItem().hasItemMeta()) return false;
+           if (!event.getItem().getItemMeta().hasDisplayName()) return false;
+           if (!event.getItem().getItemMeta().getDisplayName().startsWith("YAPS")) return false;
+           return true;
+        }
+        
+        public void YAPSWand(PlayerInteractEvent event,Player player){ 
+            if (!event.hasBlock()) return;
+            if (!player.hasPermission("yaps.info")) return;
+            if (!Yaps.AreaCreating.containsKey(player)) Yaps.AreaCreating.put(player, new Area());
 
+            Location location = event.getClickedBlock().getLocation();
+            String setOn = String.format("( %s,%s )", new Object[] { location.getX(), location.getZ() });
+
+            if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
+                    Yaps.AreaCreating.get(player).setFirstSpot(location);
+                    SendMessage(player, "&6First Spot Set on %s", new Object[] { setOn });
+                    event.setCancelled(true);
+            }
+
+            if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+                    Yaps.AreaCreating.get(player).setSecondSpot(location);
+                    SendMessage(player, "&6Second Spot Set on %s", new Object[] { setOn });
+                    event.setCancelled(true);
+            }
+        }
+
+        public void YAPSInfoWand(PlayerInteractEvent event,Player player) {
+            
+            if(!player.hasPermission("yaps.infowand")) return;
+            Block b = player.getTargetBlock((Set<Material>) null, 100);
+            Location location = b.getLocation();
+            int index = plugin.getAreaIndex(location);
+
+            if(index == -1) {
+                SendMessage(player, "&4 Not inside any area");
+                    event.setCancelled(true);
+                return;
+            }
+            Area area = Yaps.Areas.get(index);
+
+            SendMessage(player, MsgHr);
+            SendMessage(player, "&3Name: &6%s", new Object[]{ area.getName() });
+            SendMessage(player, "&3Owner: &6%s", new Object[]{ area.getOwner() });
+            SendMessage(player, "&3Flags: &6%s", new Object[]{ area.getFlags() });
+            SendMessage(player, MsgHr);
+
+            event.setCancelled(true);
+
+        }
+        
 	public boolean isValidEvent(Area area, Player player, Location location, String event) {
 		switch (event) {
 		case "place":

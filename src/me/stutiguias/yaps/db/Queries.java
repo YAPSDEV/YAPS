@@ -109,18 +109,14 @@ public class Queries extends Util implements IDataQueries {
 		ResultSet rs = null;
 
 		try {
-			String query = "INSERT INTO YAPS_Areas (`name`, `first`, `second`, `owner`, `flags`, `exit`) VALUES ('{1}','{2}','{3}','{4}','{5}','{6}')"
-					.replace("{1}", area.getName()).replace("{2}", ToString(area.getFirstSpot()))
-					.replace("{3}", ToString(area.getSecondSpot())).replace("{4}", area.getOwner())
-					.replace("{5}", area.getFlags()).replace("{6}", ToString(area.getExit()));
-			// Yaps.logger.info(query);
+			String query = "INSERT INTO YAPS_Areas (`name`, `first`, `second`, `owner`, `flags`, `exit`) VALUES (?,?,?,?,?,?)";
 			st = conn.prepareStatement(query);
-			// st.setString(1, area.getName());
-			// st.setString(2, ToString(area.getFirstSpot()));
-			// st.setString(3, ToString(area.getSecondSpot()));
-			// st.setString(4, area.getOwner());
-			// st.setString(5, area.getFlags());
-			// st.setString(6, ToString(area.getExit()));
+                        st.setString(1, area.getName());
+			st.setString(2, ToString(area.getFirstSpot()));
+			st.setString(3, ToString(area.getSecondSpot()));
+			st.setString(4, area.getOwner());
+			st.setString(5, area.getFlags());
+			st.setString(6, ToString(area.getExit()));
 			st.executeUpdate();
 		} catch (SQLException e) {
 			Yaps.logger.log(Level.WARNING, "{0} Unable to insert area", plugin.prefix);
