@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package me.stutiguias.yaps.commands;
 
-import me.stutiguias.yaps.init.Yaps;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-/**
- *
- * @author Daniel
- */
-public class Wand extends CommandHandler {
+import me.stutiguias.yaps.init.Yaps;
 
-    public Wand(Yaps plugin) {
+public class InfoWand extends CommandHandler {
+
+    public InfoWand(Yaps plugin) {
         super(plugin);
     }
 
@@ -30,20 +21,21 @@ public class Wand extends CommandHandler {
         
         if(isInvalid(sender, args)) return true;
         Player player = (Player)sender;
-        ItemStack itemStack = new ItemStack(Material.getMaterial(plugin.getConfig().getInt("WandID")),1);
+        ItemStack itemStack = new ItemStack(Material.getMaterial(plugin.getConfig().getInt("InfoWandID")),1);
         
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName("YAPS Wand");
+        itemMeta.setDisplayName("YAPS Info Wand");
         itemStack.setItemMeta(itemMeta);
         
         player.setItemInHand(itemStack);
-        SendMessage("&6Use Right and left click to set an area");
+        SendMessage("&6Use Right and left click to get information of an area.");
+        
         return true;
     }
-
+	
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-         if(!plugin.hasPermission(sender.getName(),"yaps.wand")) {
+         if(!plugin.hasPermission(sender.getName(),"yaps.infowand")) {
              SendMessage("&4Not have permission");
              return true;
          }

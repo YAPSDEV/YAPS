@@ -27,6 +27,7 @@ public class Reload extends CommandHandler {
                 
         SendMessage("&6Reloading!");
         plugin.OnReload();
+        plugin.reloadConfig();
         SendMessage("&6Reload Done!");    
         return true;
     }

@@ -61,7 +61,7 @@ public class Define extends CommandHandler {
             return true;
         }
         
-        SendMessage("&4Erro on Insert to DB!");
+        SendMessage("&4Error on Insert to DB!");
         return true;    
     }
 
