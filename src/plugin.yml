@@ -1,5 +1,5 @@
 name: "YAPS"
-version: 0.5
+version: ${project.version}
 author: "Stutiguias"
 main: "me.stutiguias.yaps.init.Yaps"
 commands:
