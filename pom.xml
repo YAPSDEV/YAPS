@@ -3,7 +3,7 @@
   <groupId>me.stutiguias</groupId>
   <artifactId>YAPS</artifactId>
   <version>0.5</version>
-  <name>YAPS</name>
+  <name>YAPS-${project.version}</name>
   <description>YAPS</description>
   
   <repositories>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.8.5-R0.1-SNAPSHOT</version>
+            <version>1.10.2-R0.1-SNAPSHOT</version>
         </dependency>
         
         <dependency>

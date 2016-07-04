@@ -51,7 +51,7 @@ public class Info extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-        if(!plugin.hasPermission(sender.getName(),"yaps.info")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.info")) {
             SendMessage("&4Not have permission");
             return false;
         }

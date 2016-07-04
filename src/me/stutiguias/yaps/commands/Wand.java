@@ -43,7 +43,7 @@ public class Wand extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-         if(!plugin.hasPermission(sender.getName(),"yaps.wand")) {
+         if(!plugin.hasPermission((Player)sender,"yaps.wand")) {
              SendMessage("&4Not have permission");
              return true;
          }

@@ -54,7 +54,7 @@ public class SetExit extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-        if(!plugin.hasPermission(sender.getName(),"yaps.setexit")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.setexit")) {
             SendMessage("&4Not have permission");
             return false;
         }

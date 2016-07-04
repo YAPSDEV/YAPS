@@ -9,6 +9,7 @@ package me.stutiguias.yaps.commands;
 import me.stutiguias.yaps.init.Yaps;
 import me.stutiguias.yaps.model.Area;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Delete extends CommandHandler {
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
         
-        if(!plugin.hasPermission(sender.getName(),"yaps.delete")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.delete")) {
             SendMessage("&4Not have permission");
             return false;
         }

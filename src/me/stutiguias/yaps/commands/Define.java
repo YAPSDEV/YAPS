@@ -68,7 +68,7 @@ public class Define extends CommandHandler {
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
         
-        if(!plugin.hasPermission(sender.getName(),"yaps.define")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.define")) {
             SendMessage("&4Not have permission");
             return false;
         }

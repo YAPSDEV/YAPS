@@ -35,7 +35,7 @@ public class InfoWand extends CommandHandler {
 	
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-         if(!plugin.hasPermission(sender.getName(),"yaps.infowand")) {
+         if(!plugin.hasPermission((Player)sender,"yaps.infowand")) {
              SendMessage("&4Not have permission");
              return true;
          }

@@ -8,6 +8,7 @@ package me.stutiguias.yaps.commands;
 
 import me.stutiguias.yaps.init.Yaps;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -34,7 +35,7 @@ public class Reload extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-        if(!plugin.hasPermission(sender.getName(),"yaps.reload")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.reload")) {
             SendMessage("&4Not have permission");
             return false;
         }

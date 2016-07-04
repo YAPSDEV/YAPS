@@ -9,6 +9,7 @@ package me.stutiguias.yaps.commands;
 import me.stutiguias.yaps.init.Yaps;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -65,7 +66,7 @@ public class ListProtectedBlocks extends  CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-       if(!plugin.hasPermission(sender.getName(),"yaps.listprotectionblocks")) {
+       if(!plugin.hasPermission((Player)sender,"yaps.listprotectionblocks")) {
            SendMessage("&4Not have permission");
            return false;
        }

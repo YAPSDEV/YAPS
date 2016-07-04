@@ -36,7 +36,7 @@ public class On extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-        if(!plugin.hasPermission(sender.getName(),"yaps.onoff")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.onoff")) {
             SendMessage("&4Not have permission");
             return false;
         }

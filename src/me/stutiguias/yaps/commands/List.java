@@ -9,6 +9,7 @@ package me.stutiguias.yaps.commands;
 import me.stutiguias.yaps.init.Yaps;
 import me.stutiguias.yaps.model.Area;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -41,7 +42,7 @@ public class List extends CommandHandler {
 
     @Override
     protected Boolean isInvalid(CommandSender sender, String[] args) {
-        if(!plugin.hasPermission(sender.getName(),"yaps.list")) {
+        if(!plugin.hasPermission((Player)sender,"yaps.list")) {
             SendMessage("&4Not have permission");
             return false;
         }
